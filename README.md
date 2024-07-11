@@ -74,6 +74,13 @@ A test is failing - ```npm run test``` - implement the code necessary to pass th
 
 ## Part 3 - Strech
 
+## Answers to questions for Part 3
+
+    When going about implementing a solution, the first step is to figure out how the tagging system for messages/conversations works.
+    After this I will attempt to add tags to individual messages, and then create a filter/search for the messages.
+
+    To test the new feature I would make test cases for adding and updating tags.
+
 Currently, we allow tags to be added to a conversation, so we can help users to find things they're interested in.
 
 We would like to extend the functionality, to allow the sender of a message to add or update tags on a single message, and allow other users to find messages based on these tags.
