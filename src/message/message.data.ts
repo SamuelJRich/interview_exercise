@@ -11,6 +11,8 @@ import { MessageDto, GetMessageDto } from './models/message.dto';
 import { ObjectID } from 'mongodb';
 import { createRichContent } from './utils/message.helper';
 import { MessageGroupedByConversationOutput } from '../conversation/models/messagesFilterInput';
+import { Tag } from '../conversation/models/CreateChatConversation.dto';
+import { TagObject } from '@nestjs/swagger/dist/interfaces/open-api-spec.interface';
 
 @Injectable()
 export class MessageData {
@@ -103,6 +105,19 @@ export class MessageData {
     return chatMessageToObject(newMessage);
 
   }
+
+  async addTag(messageId: ObjectID, newTag: Tag): Promise<TagObject> {
+    
+    const message = await this.chatMessageModel.findById(messageId);
+
+    message?.messageTag = newTag;
+
+    
+
+
+  }
+
+
 
   async resolve(messageId: ObjectID): Promise<ChatMessage> {
     const filterBy = { _id: messageId };

@@ -3,6 +3,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'mongodb';
 import { AttachmentType, GifType } from './message.dto';
 import { Field, ObjectType } from '@nestjs/graphql';
+import { Tag } from '../../conversation/models/CreateChatConversation.dto';
 
 @Schema()
 export class ReplyMessage {
@@ -136,6 +137,9 @@ export class ChatMessageModel {
     default: false,
   })
   deleted: boolean;
+
+  @Prop()
+  messageTag: Tag;
 
   @Prop({
     default: false,
