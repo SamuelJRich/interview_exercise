@@ -88,8 +88,20 @@ export class MessageData {
   }
 
   async delete(messageId: ObjectID): Promise<ChatMessage> {
-    // TODO allow a message to be marked as deleted
-    return new ChatMessage() // Minimum to pass ts checks -replace this
+    // Code for marking messages as deleted.
+    const currentMessage = await this.chatMessageModel.findById(messageId);
+    //  Stores the message currently in question, after finding it via
+    // the ID through a database query.
+    if (!currentMessage) {
+      throw new Error('The requested message cannot be found!'); // Error message if the message by ID cannot be found.
+    }
+
+    currentMessage.deleted = true; // Sets the value of the deleted property too true.
+
+    const newMessage = await currentMessage.save(); // Saves the current "empty" message to a new database slot.
+
+    return chatMessageToObject(newMessage);
+
   }
 
   async resolve(messageId: ObjectID): Promise<ChatMessage> {
